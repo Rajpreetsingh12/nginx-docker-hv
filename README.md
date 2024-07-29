@@ -9,18 +9,45 @@ The objective of this assignment is to familiarize yourself with Docker and cont
 
 Requirements:
 
-1. Basic HTML Page:
+1. Basic HTML Page & purpose:
 
    - Created a plain HTML page named `index.html` with some content (e.g., "Hello, Docker!").
 
-2. Nginx Configurations:
+     purpose of the HTML page:-
+
+   - for displaying the simple message "Hello docker!" on the localhost by hitting "http://localhost:8088/"
+
+     ![image](https://github.com/user-attachments/assets/2ebcffa9-8850-435a-93a3-c4f8d3a52f97)
+
+1. Nginx Configurations(nginx.conf) and purpose:
 
    - Created an Nginx configuration file named `nginx.conf` that serves the `index.html` page.
 
    - Configured Nginx to listen on port 80.
 
-3. Dockerfile:
+     purpose of the nginx.conf file:-
+     
+   - The nginx.conf file is the configuration file for the Nginx web server. It specifies how Nginx should behave,
+     including which files to serve, which ports to listen on, and various other configurations:-
 
+     Listening on Port 80:-
+
+     server {
+     listen 80;
+
+   - This line tells Nginx to listen for HTTP requests on port 80.
+
+     Main content:-
+
+     location / {
+    root /usr/share/nginx/html;
+    index index.html;
+}
+   - This block specifies that Nginx should serve files from the /usr/share/nginx/html directory.
+    The index index.html; line tells Nginx to use index.html as the default file to serve when someone accesses the root URL
+    
+  4. Dockerfile and purpose:
+   
    - Created a `Dockerfile` to define the Docker image.
 
    - Used an official Nginx base image.
@@ -29,6 +56,39 @@ Requirements:
 
    - Ensure that the Nginx server is started when the container is running.
 
+     purpose of the docker file:-
+
+     The Dockerfile is a script that contains a series of instructions on how to build a Docker image.
+     Each instruction creates a layer in the image. Here’s the purpose of each part of the Docker file:-
+
+   - FROM nginx:alpine :-
+     
+     This line specifies the base image for our Docker image.
+     We are using the official Nginx image based on Alpine Linux, which is a lightweight version of Linux.
+
+   - Copy Nginx Configuration:
+
+     COPY nginx.conf /etc/nginx/conf.d/default.conf
+     This line copies our custom nginx.conf file into the container,
+     replacing the default Nginx configuration with our custom configuration.
+
+   - Copy HTML File:
+
+     COPY index.html /usr/share/nginx/html/
+
+     This line copies our index.html file into the directory where Nginx looks for files to serve.
+
+     Expose Port 80:
+
+     This line informs Docker that the container will listen on port 80 at runtime.
+     It’s a way of documenting the port that the application will use.
+
+     Start Nginx:
+
+     CMD ["nginx", "-g", "daemon off;"]
+
+     This line specifies the command to run when the container starts.
+     It runs Nginx in the foreground (i.e., daemon off), which is necessary for Docker containers to keep running.
 
 4. Building the Docker Image:
 
