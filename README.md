@@ -17,7 +17,8 @@ Requirements:
 
    - for displaying the simple message "Hello docker!" on the localhost by hitting "http://localhost:8088/"
 
-     ![image](https://github.com/user-attachments/assets/2ebcffa9-8850-435a-93a3-c4f8d3a52f97)
+     ![image](https://github.com/user-attachments/assets/12d05083-5690-4c8a-af4d-4aaaa41458ad)
+
 
 1. Nginx Configurations(nginx.conf) and purpose:
 
